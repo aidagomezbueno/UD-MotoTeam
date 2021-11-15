@@ -5,4 +5,5 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def index(request):
- return HttpResponse("DEUSTO MOTO TEAM. Web en desarrollo.")
+ #return HttpResponse("DEUSTO MOTO TEAM. Web en desarrollo.")
+ return render(request, "index.html")
