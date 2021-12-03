@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +21,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#zo-xvsq^02(#f8x5r4vpr!$a*r#%mqk5on0a5cndx)nzzn^y-'
+SECRET_KEY = 'django-insecure-xx+22yf05g!7==1ta0s*7*1b2*l$9ljb-d^b-(a4va$&bvfr^@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
 
-ALLOWED_HOSTS = ['*'] #Habilitar para que pueda leer cualquier host - cuando pase a producción, tendrá que ir directamente el nombre del host 
+ALLOWED_HOSTS = ['*']
+
+
+SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
+
+
+TEMPLATE_DIRS = (
+    os.path.join(SETTINGS_PATH, 'udmototeamapp'),
+)
 
 
 # Application definition
@@ -68,8 +78,6 @@ TEMPLATES = [
     },
 ]
 
-
-
 WSGI_APPLICATION = 'udmototeam.wsgi.application'
 
 
@@ -78,16 +86,12 @@ WSGI_APPLICATION = 'udmototeam.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres', 
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': 5432
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
- 
+
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -126,9 +130,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# TEMPLATE_DIRS = ('udmototeamapp/html',)
